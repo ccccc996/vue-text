@@ -6,13 +6,13 @@
         <img src="../assets/logo.png" alt="" />
       </div>
       <!-- 绘制表单区域 -->
-      <el-form class="login_form" :model="loginFrom">
+      <el-form class="login_form" :model="loginFrom" :rules="loginFromRules">
         <!-- 用户名 -->
-        <el-form-item>
+        <el-form-item prop="username">
           <el-input v-model="loginFrom.username" prefix-icon="iconfont icon-user"></el-input>
         </el-form-item>
         <!-- 密码 -->
-        <el-form-item>
+        <el-form-item prop="password">
           <el-input v-model="loginFrom.password" type="password" prefix-icon="iconfont icon-3702mima"></el-input>
         </el-form-item>
         <el-form-item class="btns">
@@ -31,6 +31,16 @@ export default {
       loginFrom: {
         username: 'admin',
         password: 123456
+      },
+      loginFromRules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 5, max: 10, message: '用户名长度在 5 到 10 个字符', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '密码长度在 6 到 15 个字符', trigger: 'blur' }
+        ]
       }
     }
   }
@@ -81,5 +91,4 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
-
 </style>
