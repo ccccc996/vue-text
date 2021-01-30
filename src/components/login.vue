@@ -6,7 +6,7 @@
         <img src="../assets/logo.png" alt="" />
       </div>
       <!-- 绘制表单区域 -->
-      <el-form class="login_form" :model="loginFrom" :rules="loginFromRules">
+      <el-form ref="loginFromRef" class="login_form" :model="loginFrom" :rules="loginFromRules">
         <!-- 用户名 -->
         <el-form-item prop="username">
           <el-input v-model="loginFrom.username" prefix-icon="iconfont icon-user"></el-input>
@@ -17,7 +17,7 @@
         </el-form-item>
         <el-form-item class="btns">
           <el-button type="primary">登陆</el-button>
-          <el-button type="info">重置</el-button>
+          <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -42,6 +42,11 @@ export default {
           { min: 6, max: 15, message: '密码长度在 6 到 15 个字符', trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    resetLoginForm() {
+      this.$refs.loginFromRef.resetFields()
     }
   }
 }
