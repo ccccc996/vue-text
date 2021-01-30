@@ -6,12 +6,14 @@
         <img src="../assets/logo.png" alt="" />
       </div>
       <!-- 绘制表单区域 -->
-      <el-form class="login_form">
+      <el-form class="login_form" :model="loginFrom">
+        <!-- 用户名 -->
         <el-form-item>
-          <el-input></el-input>
+          <el-input v-model="loginFrom.username" prefix-icon="iconfont icon-user"></el-input>
         </el-form-item>
+        <!-- 密码 -->
         <el-form-item>
-          <el-input></el-input>
+          <el-input v-model="loginFrom.password" type="password" prefix-icon="iconfont icon-3702mima"></el-input>
         </el-form-item>
         <el-form-item class="btns">
           <el-button type="primary">登陆</el-button>
@@ -23,7 +25,16 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      loginFrom: {
+        username: 'admin',
+        password: 123456
+      }
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -70,4 +81,5 @@ export default {}
   display: flex;
   justify-content: flex-end;
 }
+
 </style>
