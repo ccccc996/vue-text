@@ -16,7 +16,7 @@
           <el-input v-model="loginFrom.password" type="password" prefix-icon="iconfont icon-3702mima"></el-input>
         </el-form-item>
         <el-form-item class="btns">
-          <el-button type="primary">登陆</el-button>
+          <el-button type="primary" @click="login">登陆</el-button>
           <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
@@ -30,7 +30,7 @@ export default {
     return {
       loginFrom: {
         username: 'admin',
-        password: 123456
+        password: '123456'
       },
       loginFromRules: {
         username: [
@@ -47,6 +47,13 @@ export default {
   methods: {
     resetLoginForm() {
       this.$refs.loginFromRef.resetFields()
+    },
+    login() {
+      this.$refs.loginFromRef.validate(async (valid) => {
+        console.log(valid)
+        // const { data: res } = await this.$http.post('/login', this.loginFrom)
+        // console.log(res)
+      })
     }
   }
 }
