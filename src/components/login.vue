@@ -50,9 +50,11 @@ export default {
     },
     login() {
       this.$refs.loginFromRef.validate(async (valid) => {
-        console.log(valid)
-        // const { data: res } = await this.$http.post('/login', this.loginFrom)
+        // console.log(valid)
+        const { data: res } = await this.$http.post('/login', this.loginFrom)
         // console.log(res)
+        if (res.meta.status !== 200) return this.$message.error('登陆失败')
+        this.$message.success('登陆成功')
       })
     }
   }
