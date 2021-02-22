@@ -15,7 +15,8 @@
           <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id">
             <!-- 一级菜单 -->
             <template slot="title">
-              <i :class="iconObj[item.id]"></i>
+              <!-- <i :class="iconObj[item.id]"></i> -->
+              <i :class="item.icon"></i>
               <span>{{ item.authName }}</span>
             </template>
             <!-- 二级菜单 -->
@@ -40,13 +41,14 @@ export default {
   data() {
     return {
       menulist: [],
-      iconObj: {
-        '125': 'iconfont icon-user',
-        '103': 'iconfont icon-tijikongjian',
-        '101': 'iconfont icon-shangpin',
-        '102': 'iconfont icon-danju',
-        '145': 'iconfont icon-baobiao'
-      }
+      // iconObj: {
+      //   '125': 'iconfont icon-user',
+      //   '103': 'iconfont icon-tijikongjian',
+      //   '101': 'iconfont icon-shangpin',
+      //   '102': 'iconfont icon-danju',
+      //   '145': 'iconfont icon-baobiao'
+      // }
+      icons: ['iconfont icon-user', 'iconfont icon-tijikongjian', 'iconfont icon-shangpin', 'iconfont icon-danju', 'iconfont icon-baobiao']
     }
   },
 
@@ -63,6 +65,11 @@ export default {
       const { data: res } = await this.$http.get('menus')
       console.log(res)
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+
+      // 添加字体图标
+      res.data.forEach((item, index) => {
+        item.icon = this.icons[index]
+      })
       this.menulist = res.data
     }
   }
