@@ -11,17 +11,17 @@
     <!-- 页面主体 -->
     <el-container>
       <el-aside width="200px">
-        <el-menu background-color="#333744" text-color="#fff" active-text-color="#ffd04b">
-          <el-submenu :index="item.id" v-for="item in menulist" :key="item.id">
+        <el-menu background-color="#333744" text-color="#fff" active-text-color="#409eff">
+          <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id">
             <!-- 一级菜单 -->
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i :class="iconObj[item.id]"></i>
               <span>{{ item.authName }}</span>
             </template>
             <!-- 二级菜单 -->
-            <el-menu-item :index="subitem.id" :key="subitem.id" v-for="subitem in item.children">
+            <el-menu-item :index="subitem.id + ''" :key="subitem.id" v-for="subitem in item.children">
               <template slot="title">
-                <i class="el-icon-location"></i>
+                <i class="el-icon-menu"></i>
                 <span>{{ subitem.authName }}</span>
               </template>
             </el-menu-item>
@@ -39,7 +39,14 @@ export default {
 
   data() {
     return {
-      menulist: []
+      menulist: [],
+      iconObj: {
+        '125': 'iconfont icon-user',
+        '103': 'iconfont icon-tijikongjian',
+        '101': 'iconfont icon-shangpin',
+        '102': 'iconfont icon-danju',
+        '145': 'iconfont icon-baobiao'
+      }
     }
   },
 
@@ -87,5 +94,9 @@ export default {
 }
 .el-main {
   background-color: #eaedf1;
+}
+
+.iconfont {
+  margin-right: 10px;
 }
 </style>
